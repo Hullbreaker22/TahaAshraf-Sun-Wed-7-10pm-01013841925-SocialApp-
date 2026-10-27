@@ -135,31 +135,31 @@
                     <i class="fa-solid fa-ellipsis"></i>
                 </button>
 
-                @if(activeSavedPostId() === post._id){
-                    @if(post.user?._id == SavedUserId()?._id){
-                        <div class="absolute right-0 z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
-                            <button (click)="BookMarkPost(post)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                <i class="fa-regular fa-bookmark text-current"></i>
-                                {{ post.bookmarked ? ('middleContent.Unsave Post' | translate) : ('middleContent.Save Post' | translate) }}
-                            </button>
-                            <button (click)="openEditModal(post)" class="flex w-full items-center cursor-pointer gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                <i class="fa-solid fa-pen-to-square text-current"></i>
-                                {{ "middleContent.Edit Post" | translate }}
-                            </button>
-                            <button (click)="DeleteThePost(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm font-semibold transition-all duration-200 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50">
-                                <i class="fa-solid fa-trash-can text-current"></i>
-                                {{ "middleContent.Delete Post" | translate }}
-                            </button>
-                        </div>
-                    }@else {
-                        <div class="absolute right-0 z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
-                            <button (click)="BookMarkPost(post)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                <i class="fa-regular fa-bookmark text-current"></i>
-                                {{ post.bookmarked ? ('middleContent.Unsave Post' | translate) : ('middleContent.Save Post' | translate) }}
-                            </button>
-                        </div>
-                    }
-                }
+@if(activeSavedPostId() === post._id){
+    @if(post.user?._id == SavedUserId()?._id){
+        <div class="absolute right-0 rtl:left-0 rtl:right-auto z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
+            <button (click)="BookMarkPost(post)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left rtl:text-right text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                <i class="fa-regular fa-bookmark text-current"></i>
+                {{ post.bookmarked ? ('middleContent.Unsave Post' | translate) : ('middleContent.Save Post' | translate) }}
+            </button>
+            <button (click)="openEditModal(post)" class="flex w-full items-center cursor-pointer gap-2 px-3 py-2 text-left rtl:text-right text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                <i class="fa-solid fa-pen-to-square text-current"></i>
+                {{ "middleContent.Edit Post" | translate }}
+            </button>
+            <button (click)="DeleteThePost(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left rtl:text-right text-sm font-semibold transition-all duration-200 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50">
+                <i class="fa-solid fa-trash-can text-current"></i>
+                {{ "middleContent.Delete Post" | translate }}
+            </button>
+        </div>
+    }@else {
+        <div class="absolute right-0 rtl:left-0 rtl:right-auto z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
+            <button (click)="BookMarkPost(post)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left rtl:text-right text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                <i class="fa-regular fa-bookmark text-current"></i>
+                {{ post.bookmarked ? ('middleContent.Unsave Post' | translate) : ('middleContent.Save Post' | translate) }}
+            </button>
+        </div>
+    }
+}
             </div>
         </div>
 

@@ -5,10 +5,11 @@ import { finalize, map } from 'rxjs';
 import { IUser } from '../../../../core/Models/iuser.interface';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-rightside',
-  imports: [RouterLink , TranslatePipe],
+  imports: [RouterLink , TranslatePipe ,NgClass],
   templateUrl: './rightside.component.html',
   styleUrl: './rightside.component.css',
 })
@@ -20,66 +21,65 @@ export class RightsideComponent implements OnInit {
 
   SuggestedList:WritableSignal<ISuggestedUser[]> = signal([]) 
   
-   private readonly UsersBase = inject(UsersService)
-   searchInput = viewChild<ElementRef<HTMLInputElement>>('SearchInput');
-   filtervalue:WritableSignal<string> = signal('')
-   isFollowed:WritableSignal<boolean> = signal(false)
-   isLoading:WritableSignal<boolean> = signal(false)
-   LocalUser:WritableSignal<IUser> = signal({} as IUser)
-   Limits:WritableSignal<number> = signal(50)
+  private readonly UsersBase = inject(UsersService)
+  searchInput = viewChild<ElementRef<HTMLInputElement>>('SearchInput');
+  filtervalue:WritableSignal<string> = signal('')
+  isFollowed:WritableSignal<boolean> = signal(false)
+  isLoading:WritableSignal<boolean> = signal(false)
+  LocalUser:WritableSignal<IUser> = signal({} as IUser)
+  Limits:WritableSignal<number> = signal(50)
+
+  isSuggestionsOpen: WritableSignal<boolean> = signal(false);
+
+  toggleSuggestions() {
+    this.isSuggestionsOpen.update(value => !value);
+  }
+
   setFilterValue(){
     let Search = this.searchInput()?.nativeElement;
     this.filtervalue.set(`${Search?.value}`)
     this.getUsers()
-    
   }
 
-getUsers() {
-  this.UsersBase.getSuggestionsList(this.Limits()).subscribe({
-    next: (res) => {
-      const allUsers: ISuggestedUser[] = res.data.suggestions;
-      const filtered = allUsers.filter(user => 
-        user.name.toLowerCase().includes(`${this.filtervalue()}`.toLowerCase())
-      );
-      if(this.filtervalue().trim() != ''){
-        this.SuggestedList.set(filtered);
-      }else{
-         this.SuggestedList.set(allUsers);
+  getUsers() {
+    this.UsersBase.getSuggestionsList(this.Limits()).subscribe({
+      next: (res) => {
+        const allUsers: ISuggestedUser[] = res.data.suggestions;
+        const filtered = allUsers.filter(user => 
+          user.name.toLowerCase().includes(`${this.filtervalue()}`.toLowerCase())
+        );
+        if(this.filtervalue().trim() != ''){
+          this.SuggestedList.set(filtered);
+        }else{
+           this.SuggestedList.set(allUsers);
+        }
+      },
+      error: (err) => {
+        console.log(err);    
       }
+    });
+  }
 
-    },
-    error: (err) => {
-      console.log(err);    
+  FollowUnfollowUser(userId:string){
+    this.isLoading.set(true)  
+    if(userId){
+      this.UsersBase.FolloUser(userId).pipe(finalize(()=>{
+        this.isLoading.set(false)
+      })).subscribe({
+        next:(res)=>{
+          this.getUsers()
+          this.isFollowed.set(res.data.following)
+        },error:(err)=>{
+          console.log(err);
+        }
+      })
     }
-  });
-}
-
-
-FollowUnfollowUser(userId:string){
-
-  this.isLoading.set(true)  
-  if(userId){
-    this.UsersBase.FolloUser(userId).pipe(finalize(()=>{
-      this.isLoading.set(false)
-    })).subscribe({
-      next:(res)=>{
-        this.getUsers()
-        this.isFollowed.set(res.data.following)
-        
-      },error:(err)=>{
-        console.log(err);
-      }
-    })
   }
 
-
-}
-
-GetlockalUser(){
-  let savedUser = localStorage.getItem('SocialUser')
-  if(JSON.parse(savedUser!)){
-    this.LocalUser.set(JSON.parse(savedUser!))
+  GetlockalUser(){
+    let savedUser = localStorage.getItem('SocialUser')
+    if(JSON.parse(savedUser!)){
+      this.LocalUser.set(JSON.parse(savedUser!))
+    }
   }
-}
-
 }

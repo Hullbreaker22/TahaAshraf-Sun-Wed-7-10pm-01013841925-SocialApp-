@@ -52,26 +52,25 @@
                   <i class="fa-solid fa-ellipsis text-current"></i>
                 </button>
 
-                @if (IsSavedOpen()) {
-                  <div class="absolute right-0 z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
-                    <button (click)="BookmarkElement(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
-                      <i class="fa-regular fa-bookmark text-current"></i>
-                      {{ post.bookmarked ? ('originalPost.Unsave Post' | translate) : ('originalPost.Save Post' | translate) }}
-                    </button>
+              @if (IsSavedOpen()) {
+                <div class="absolute right-0 rtl:left-0 rtl:right-auto z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
+                  <button (click)="BookmarkElement(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left rtl:text-right text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                    <i class="fa-regular fa-bookmark text-current"></i>
+                    {{ post.bookmarked ? ('originalPost.Unsave Post' | translate) : ('originalPost.Save Post' | translate) }}
+                  </button>
 
-                    @if (post.user?._id === SavedUserId()._id) {
-                      <!-- زر فتح Modal التعديل -->
-                      <button (click)="OpenUpdateModal()" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
-                        <i class="fa-solid fa-pen-to-square text-current"></i>
-                        {{ "originalPost.Edit Post" | translate }}
-                      </button>
-                      <button (click)="DeleteThePost(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] font-semibold transition-all duration-200 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50">
-                        <i class="fa-solid fa-trash-can text-current"></i>
-                        {{ "originalPost.Delete Post" | translate }}
-                      </button>
-                    }
-                  </div>
-                }
+                  @if (post.user?._id === SavedUserId()._id) {
+                    <button (click)="OpenUpdateModal()" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left rtl:text-right text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                      <i class="fa-solid fa-pen-to-square text-current"></i>
+                      {{ "originalPost.Edit Post" | translate }}
+                    </button>
+                    <button (click)="DeleteThePost(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left rtl:text-right text-[.875rem] font-semibold transition-all duration-200 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50">
+                      <i class="fa-solid fa-trash-can text-current"></i>
+                      {{ "originalPost.Delete Post" | translate }}
+                    </button>
+                  }
+                </div>
+              }
               </div>
             </div>
 

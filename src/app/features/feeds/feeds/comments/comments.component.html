@@ -59,18 +59,18 @@
                                 <button #selectArea (click)="checkSelectStatus(comment._id)" class="rounded-full cursor-pointer p-1 text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </button>
-                                @if(Selectedcomment() == comment._id){
-                                  <div #selectArea class="absolute right-0 z-20 mt-1 w-32 overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-1 shadow-lg">
-                                    <button (click)="openEditModal(comment)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                        <i class="fa-regular fa-pen-to-square text-current"></i>
-                                        {{ "comments.Edit" | translate }}
-                                    </button>
-                                    <button (click)="DeleteElement(comment._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40">
-                                        <i class="fa-solid fa-trash-can text-current"></i>
-                                        {{ "comments.Delete" | translate }}
-                                    </button>
-                                 </div>
-                                }
+                            @if(Selectedcomment() == comment._id){
+                            <div #selectArea class="absolute right-0 rtl:left-0 rtl:right-auto z-20 mt-1 w-32 overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-1 shadow-lg">
+                                <button (click)="openEditModal(comment)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left rtl:text-right text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <i class="fa-regular fa-pen-to-square text-current"></i>
+                                    {{ "comments.Edit" | translate }}
+                                </button>
+                                <button (click)="DeleteElement(comment._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left rtl:text-right text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40">
+                                    <i class="fa-solid fa-trash-can text-current"></i>
+                                    {{ "comments.Delete" | translate }}
+                                </button>
+                            </div>
+                            }
                             </div>
                             }
                     </div>
@@ -115,7 +115,6 @@
                         <div class="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-[#f0f2f5] dark:bg-slate-900 px-2.5 py-1.5 focus-within:border-[#c7dafc] dark:focus-within:border-blue-700 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all">
                             
                             <form (submit)="SubmitReply($event, PoistId(), comment._id)">
-                                <!-- Textarea الرد -->
                                 <textarea 
                                     [formControl]="ReplyBody" 
                                     (input)="changeReplyEmpty()" 
@@ -132,7 +131,6 @@
                                             <input type="file" class="hidden" (change)="ReadReplyImage($event)">
                                         </label>
 
-                                        <!-- ايموجي للرد -->
                                         <div class="relative">
                                             <button 
                                                 type="button" 

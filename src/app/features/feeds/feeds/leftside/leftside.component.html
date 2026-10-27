@@ -1,11 +1,12 @@
-<div class="left-side hidden h-fit space-y-3 xl:sticky xl:top-21 xl:block">
+<div class="left-side h-fit w-full xl:sticky xl:top-21 xl:block">
   <div 
-    [class.w-16]="isCollapsed()" 
-    [class.w-52]="!isCollapsed()" 
-    class="relative flex flex-col justify-between min-h-105 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
+    [class.xl:w-16]="isCollapsed()" 
+    [class.xl:w-52]="!isCollapsed()" 
+    class="relative flex flex-row xl:flex-col justify-between items-center xl:items-stretch rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
   >
-    <div>
-      <div class="flex items-center mb-2 px-1" [class.justify-center]="isCollapsed()" [class.justify-between]="!isCollapsed()">
+    <div class="flex flex-row xl:flex-col items-center xl:items-stretch w-full justify-around xl:justify-start gap-1">
+      
+      <div class="hidden xl:flex items-center mb-2 px-1" [class.justify-center]="isCollapsed()" [class.justify-between]="!isCollapsed()">
         @if (!isCollapsed()) {
           <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-1">Menu</span>
         }
@@ -18,65 +19,66 @@
         </button>
       </div>
 
-      <div class="space-y-1">
+      <div class="flex flex-row xl:flex-col items-center xl:items-stretch w-full gap-1 justify-around xl:justify-start">
         <button 
           #leftBTN 
           (click)="activeFeed()" 
-          [title]="isCollapsed() ? ('leftside.Feed' | translate) : ''"
-          class="flex w-full items-center cursor-pointer gap-3 rounded-xl px-3 py-2.5 text-left text-[.875rem] font-bold transition-all bg-[#e7f3ff] dark:bg-blue-950/60 text-[#1877f2] dark:text-blue-400"
-          [class.justify-center]="isCollapsed()"
+          [title]="'leftside.Feed' | translate"
+          class="flex items-center justify-center xl:justify-start cursor-pointer gap-3 rounded-xl p-2.5 xl:px-3 text-left text-[.875rem] font-bold transition-all bg-[#e7f3ff] dark:bg-blue-950/60 text-[#1877f2] dark:text-blue-400"
+          [class.xl:justify-center]="isCollapsed()"
         >
           <i class="fa-regular fa-newspaper text-[18px] shrink-0 text-current"></i>
           @if (!isCollapsed()) {
-            <span class="truncate">{{ "leftside.Feed" | translate }}</span>
+            <span class="hidden xl:inline truncate">{{ "leftside.Feed" | translate }}</span>
           }
         </button>
 
         <button 
           #leftBTN 
           (click)="activeMyPosts()" 
-          [title]="isCollapsed() ? ('leftside.My Posts' | translate) : ''"
-          class="flex w-full items-center cursor-pointer gap-3 rounded-xl px-3 py-2.5 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-          [class.justify-center]="isCollapsed()"
+          [title]="'leftside.My Posts' | translate"
+          class="flex items-center justify-center xl:justify-start cursor-pointer gap-3 rounded-xl p-2.5 xl:px-3 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+          [class.xl:justify-center]="isCollapsed()"
         >
           <i class="fa-solid fa-wand-magic-sparkles text-[16px] shrink-0 text-current"></i>
           @if (!isCollapsed()) {
-            <span class="truncate">{{ "leftside.My Posts" | translate }}</span>
+            <span class="hidden xl:inline truncate">{{ "leftside.My Posts" | translate }}</span>
           }
         </button>
 
         <button 
           #leftBTN 
           (click)="activeCommunity()" 
-          [title]="isCollapsed() ? ('leftside.Community' | translate) : ''"
-          class="flex w-full items-center cursor-pointer gap-3 rounded-xl px-3 py-2.5 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-          [class.justify-center]="isCollapsed()"
+          [title]="'leftside.Community' | translate"
+          class="flex items-center justify-center xl:justify-start cursor-pointer gap-3 rounded-xl p-2.5 xl:px-3 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+          [class.xl:justify-center]="isCollapsed()"
         >
           <i class="fa-solid fa-earth-europe text-[16px] shrink-0 text-current"></i>
           @if (!isCollapsed()) {
-            <span class="truncate">{{ "leftside.Community" | translate }}</span>
+            <span class="hidden xl:inline truncate">{{ "leftside.Community" | translate }}</span>
           }
         </button>
 
+        <!-- Saved Button -->
         <button 
           #leftBTN 
           (click)="ActiveMarked()" 
-          [title]="isCollapsed() ? ('leftside.Saved' | translate) : ''"
-          class="flex w-full items-center cursor-pointer gap-3 rounded-xl px-3 py-2.5 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-          [class.justify-center]="isCollapsed()"
+          [title]="'leftside.Saved' | translate"
+          class="flex items-center justify-center xl:justify-start cursor-pointer gap-3 rounded-xl p-2.5 xl:px-3 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+          [class.xl:justify-center]="isCollapsed()"
         >
           <i class="fa-regular fa-bookmark text-[16px] shrink-0 text-current"></i>
           @if (!isCollapsed()) {
-            <span class="truncate">{{ "leftside.Saved" | translate }}</span>
+            <span class="hidden xl:inline truncate">{{ "leftside.Saved" | translate }}</span>
           }
         </button>
       </div>
     </div>
 
-    <div class="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 space-y-1">
+    <div class="hidden xl:flex pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex-col space-y-1 w-full">
       <a 
         routerLink="/sittings"
-        [title]="isCollapsed() ? 'Settings' : ''"
+        [title]="isCollapsed()  ? 'Settings' : ''"
         class="flex w-full items-center cursor-pointer gap-3 rounded-xl px-3 py-2.5 text-left text-[.875rem] font-bold transition-all text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
         [class.justify-center]="isCollapsed()"
       >
