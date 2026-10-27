@@ -1,0 +1,222 @@
+{
+  "navbar": {
+    "Route Posts": "Route Posts",
+    "Feed": "Feed",
+    "Profile": "Profile",
+    "Notifications": "Notifications",
+    "Sittings": "Sittings",
+    "Logout": "Logout"
+  }  ,
+
+
+  "leftside": {
+    "Feed": "Feed",
+    "My Posts": "My Posts",
+    "Community": "Community",
+    "Saved": "Saved"
+  } , 
+
+  "rightside": {
+    "Suggested Friends": "Suggested Friends",
+    "Search friends...": "Search friends...",
+    "Follow": "Follow",
+    "followers": "followers",
+    "mutual": "mutual",
+    "No users found": "No users found",
+    "We couldn't find any results matching your search.": "We couldn't find any results matching your search.",
+    "View more": "View more"
+  } ,
+  "middleContent": {
+    "Public": "Public",
+    "Followers": "Followers",
+    "Only Me": "Only Me",
+    "Photo/video": "Photo/video",
+    "Feeling/activity": "Feeling/activity",
+    "Post": "Post",
+    "Save Post": "Save Post",
+    "Unsave Post": "Unsave Post",
+    "Edit Post": "Edit Post",
+    "Delete Post": "Delete Post",
+    "Saved": "Saved",
+    "Original Post": "Original Post",
+    "Likes": "Likes",
+    "shares": "shares",
+    "comments": "comments",
+    "View details": "View details",
+    "No posts yet. Be the first one to publish.": "No posts yet. Be the first one to publish.",
+    "Previous": "Previous",
+    "Next": "Next",
+    "Share Post": "Share Post",
+    "Say something about this post...": "Say something about this post...",
+    "Cancel": "Cancel",
+    "Share Now": "Share Now"
+  } ,
+  "postActions": {
+    "Like": "Like",
+    "Comment": "Comment",
+    "Share": "Share",
+    "Loading comments...": "Loading comments...",
+    "Share Post": "Share Post",
+    "Say something about this post...": "Say something about this post...",
+    "Cancel": "Cancel",
+    "Share Now": "Share Now"
+  } ,
+
+  "timeAgo": {
+    "justNow": "Just now",
+    "m": "m ago",
+    "h": "h ago",
+    "d": "d ago",
+    "y": "y ago"
+  },
+  "placeholders": {
+    "whatsOnYourMind": "What's on your mind, {{name}}?",
+    "searchFriends": "Search friends...",
+    "saySomething": "Say something about this post..."
+  },
+  "comments": {
+    "Comments": "Comments",
+    "Most relevant": "Most relevant",
+    "Newest": "Newest",
+    "Like": "Like",
+    "Reply": "Reply",
+    "Hide replies": "Hide replies",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "No replies yet.": "No replies yet.",
+    "Replying to": "Replying to",
+    "Write a reply...": "Write a reply...",
+    "No comments yet": "No comments yet",
+    "Be the first one to share your thoughts on this post!": "Be the first one to share your thoughts on this post!",
+    "comment as Taha": "comment as Taha",
+    "Edit Comment": "Edit Comment",
+    "Editing as": "Editing as",
+    "Add to your comment": "Add to your comment",
+    "Cancel": "Cancel",
+    "Save Changes": "Save Changes"
+  }, 
+  
+  "months": {
+    "1": "January",
+    "2": "February",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
+  "time": {
+    "am": "AM",
+    "pm": "PM"
+  } , 
+  "profile": {
+    "Add cover": "Add cover",
+    "Route Posts member": "Route Posts member",
+    "Followers": "Followers",
+    "Following": "Following",
+    "Bookmarks": "Bookmarks",
+    "About": "About",
+    "Active on Route Posts": "Active on Route Posts",
+    "My posts": "My posts",
+    "Saved posts": "Saved posts",
+    "My Posts": "My Posts",
+    "Saved": "Saved",
+    "View details": "View details",
+    "likes": "likes",
+    "shares": "shares",
+    "comments": "comments"
+  } , 
+  "notifications": {
+    "Notifications": "Notifications",
+    "Realtime updates for likes, comments, shares, and follows.": "Realtime updates for likes, comments, shares, and follows.",
+    "Mark all as read": "Mark all as read",
+    "All": "All",
+    "Unread": "Unread",
+    "Read": "Read",
+    "Mark as read": "Mark as read",
+    "No notifications yet": "No notifications yet",
+    "When you get new notifications, they’ll show up here. Stay tuned!": "When you get new notifications, they’ll show up here. Stay tuned!"
+  }, 
+  "followers": {
+    "Back": "Back",
+    "Following": "Following",
+    "Follow": "Follow",
+    "Save Post": "Save Post",
+    "Unsave Post": "Unsave Post",
+    "Edit Post": "Edit Post",
+    "Delete Post": "Delete Post",
+    "Original Post": "Original Post",
+    "Likes": "Likes",
+    "shares": "shares",
+    "comments": "comments",
+    "View details": "View details",
+    "No posts yet": "No posts yet"
+  },
+  "privacy": {
+    "public": "Public",
+    "following": "Followers",
+    "followers": "Followers",
+    "only_me": "Only me"
+  }, 
+  "suggestions": {
+    "Back to feed": "Back to feed",
+    "All Suggested Friends": "All Suggested Friends",
+    "Follow": "Follow",
+    "followers": "followers",
+    "mutual": "mutual",
+    "Load more users": "Load more users",
+    "You are all Set": "You are all Set"
+  } ,
+  "viewDetails": {
+    "Back": "Back",
+    "Save Post": "Save Post",
+    "Unsave Post": "Unsave Post",
+    "Edit Post": "Edit Post",
+    "Delete Post": "Delete Post",
+    "Original Post": "Original Post",
+    "Likes": "Likes",
+    "shares": "shares",
+    "comments": "comments",
+    "View details": "View details",
+    "Post is no longer available": "Post is no longer available",
+    "This post may have been deleted, or you might not have permission to view it.": "This post may have been deleted, or you might not have permission to view it.",
+    "Go Back": "Go Back"
+  } , 
+  "originalPost": {
+    "Back": "Back",
+    "Save Post": "Save Post",
+    "Unsave Post": "Unsave Post",
+    "Edit Post": "Edit Post",
+    "Delete Post": "Delete Post",
+    "Likes": "Likes",
+    "Shares": "Shares",
+    "comments": "comments",
+    "This content isn't available": "This content isn't available",
+    "When this happens, it's usually because the owner only shared it with a small group, changed who can see it, or it has been deleted.": "When this happens, it's usually because the owner only shared it with a small group, changed who can see it, or it has been deleted.",
+    "Go Back": "Go Back",
+    "Back to Feed": "Back to Feed"
+  } ,
+    "settings": {
+        "Change Password": "Change Password",
+        "Keep your account secure by using a strong password.": "Keep your account secure by using a strong password.",
+        "Current Password": "Current Password",
+        "Enter new password": "Enter new password",
+        "New password is required.": "New password is required.",
+        "At least 8 characters with uppercase, lowercase, number, and special character": "At least 8 characters with uppercase, lowercase, number, and special character",
+        "New password": "New password",
+        "Confirm new password": "Confirm new password",
+        "Re-enter new password": "Re-enter new password",
+        "Please confirm your new password.": "Please confirm your new password.",
+        "Passwords don't match.": "Passwords don't match.",
+        "Update Password": "Update Password"
+    } 
+
+  
+   
+  
+}

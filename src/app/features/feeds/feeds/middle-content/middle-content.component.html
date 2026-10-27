@@ -1,0 +1,428 @@
+<section class="space-y-5">
+    <div class="rounded-2xl border shadow-lg border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-800 p-4 transition-colors">
+       <form #createForm (submit)="CreatePost($event,createForm)"> 
+        <div class="grid gap-2 grid-cols-2">
+            <div class="mb-3 flex gap-3 items-start">
+                <img [src]="SavedUserId()?.photo" alt="profileOne" class="h-11 w-11 object-cover rounded-full">
+                <div>
+                    <p class="text-[1rem] font-extrabold text-slate-900 dark:text-slate-100">
+                        {{SavedUserId()?.name}}
+                    </p>
+                    <div class="mt-1 inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 text-[.75rem] font-semibold">
+                        <i class="fa-solid fa-earth-europe text-gray-400 dark:text-slate-400"></i>
+                        <select [formControl]="PostPrivacy" name="field" class="bg-transparent outline-none border-none text-[12px] py-1 text-slate-700 dark:text-slate-200">
+                            <option value="public" selected class="dark:bg-slate-900">{{ "middleContent.Public" | translate }}</option>
+                            <option value="following" class="dark:bg-slate-900">{{ "middleContent.Followers" | translate }}</option>
+                            <option value="only_me" class="dark:bg-slate-900">{{ "middleContent.Only Me" | translate }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <textarea #TextBody [formControl]="Postbody" (input)="changeStatus()" name="" [placeholder]="'placeholders.whatsOnYourMind' | translate: { name: SavedUserId()?.name || '' }" rows="4" id="" class="w-full rounded-2xl border transition-all placeholder:text-gray-400 dark:placeholder:text-slate-500 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-[17px] focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-[#1877f2]"></textarea>
+         <div class="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 dark:border-slate-800 pt-3">
+
+                <div class="relative gap-2 flex items-center">
+                    <label class="relative overflow-hidden flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all font-normal text-slate-600 dark:text-slate-300">
+                        <i class="fa-regular fa-image text-[17px] text-emerald-600"></i>
+                        <h2 class="hidden sm:inline">{{ "middleContent.Photo/video" | translate }}</h2>                      
+                        <input (change)="ReadUploadedImg($event)" type="file" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                    </label>
+
+                        <div class="relative emojiArea">
+                        <button type="button" (click)="toggleEmoji()"
+                            [class.bg-slate-100]="showEmoji()"
+                            [class.dark:bg-slate-800]="showEmoji()"
+                            class="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 FavList text-sm font-normal text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
+                            <i class="fa-regular fa-face-smile text-[17px] text-amber-500"></i>
+                            <h2 class="hidden sm:inline">{{ "middleContent.Feeling/activity" | translate }}</h2>
+                        </button>
+
+                        @if (showEmoji()) {
+                            <div class="absolute left-0 top-full z-30 mt-2 w-72 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg">
+                            <div class="flex gap-1 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-1.5">
+                                @for (tab of emojiTabs; track tab.name) {
+                                <button type="button" (click)="activeEmojiTab.set(tab.name)" [title]="tab.name"
+                                    [class]="activeEmojiTab() === tab.name
+                                    ? 'flex-1 cursor-pointer rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 py-1 text-lg shadow-sm'
+                                    : 'flex-1 cursor-pointer rounded-lg py-1 text-lg opacity-60 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:opacity-100'">
+                                    {{ tab.icon }}
+                                </button>
+                                }
+                            </div>
+
+                            <div class="grid max-h-48 grid-cols-8 gap-0.5 overflow-y-auto p-2">
+                                @for (emoji of activeEmojis(); track $index) {
+                                <button type="button" (click)="addEmoji(emoji)"
+                                    class="cursor-pointer rounded-md p-1 text-xl transition hover:scale-110 hover:bg-slate-100 dark:hover:bg-slate-800">
+                                    {{ emoji }}
+                                </button>
+                                }
+                            </div>
+                            </div>
+                        }
+                        </div>
+                </div>
+
+                        <button
+                        type="submit"
+                        [disabled]="isEmpty()"
+                        [class.cursor-not-allowed]="isEmpty()"
+                        [class.opacity-40]="isEmpty()"
+                        [class.cursor-pointer]="!isEmpty()"
+                        [class.hover:bg-[#166fe5]]="!isEmpty()"
+                        class="flex items-center gap-2 rounded-lg bg-[#1877f2] px-5 py-2 text-[.875rem] font-extrabold text-white shadow-lg transition-colors"
+                        >
+                        {{ "middleContent.Post" | translate }}
+                        <i class="fa-regular fa-paper-plane"></i>
+                        </button>
+
+                 @if(ImagePreview()){
+                 <div class="relative rounded-2xl">
+                    <img [src]="ImagePreview()" alt="" class="rounded-xl object-cover">
+                    <button type="button" (click)="ImagePreview.set(null) ; removeImage()" class="absolute cursor-pointer transition-all duration-300 hover:bg-slate-300 dark:hover:bg-slate-700 top-3 right-5 flex justify-center items-center py-1 px-0.5 rounded-full text-sm text-slate-500 dark:text-slate-300 bg-slate-200 dark:bg-slate-800">
+                       <i class="fa-solid fa-xmark text-current"></i>
+                    </button>
+                 </div>
+                }
+         </div>
+        </form>
+    </div>
+</section>
+
+@for (post of Postslist(); track post._id) {
+<div class="rounded-xl border shadow-lg mt-3 border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors">
+    <div class="p-3.5">
+        <div class="flex items-center gap-3">
+              @if(post.user?._id == SavedUserId()?._id){
+                <a [routerLink]="['/profile', SavedUserId()?._id]">
+                     <img [src]="post.user?.photo" [alt]="post.user?.name" class="h-11 w-11 rounded-full object-cover">
+                 </a>
+              }@else {
+                <a [routerLink]="['/followers', post.user?._id]">
+                      <img [src]="post.user?.photo" [alt]="post.user?.name" class="h-11 w-11 rounded-full object-cover">
+                 </a>
+              }
+
+            <div class="min-w-0 flex-1">
+                @if(post.user?._id == SavedUserId()?._id){
+                    <a [routerLink]="['/profile', SavedUserId()?._id]" class="text-[.875rem] font-bold text-slate-900 dark:text-slate-100 hover:underline">
+                        {{ post.user?.name}}
+                    </a>
+                }@else {
+                    <a [routerLink]="['/followers', post.user?._id]" class="text-[.875rem] font-bold text-slate-900 dark:text-slate-100 hover:underline">
+                        {{ post.user?.name}}
+                    </a>
+                }
+                 
+                <div class="flex items-center text-slate-500 dark:text-slate-400 gap-1.5 text-[.75rem]">
+                    &#64;{{ post.user?.username }} .
+                    @if(post.isShare){
+                      <button [routerLink]="['/viewdetails', post._id]" class="rounded hover:bg-slate-100 dark:hover:bg-slate-800 px-0.5 cursor-pointer py-0.5 text-[.75rem] font-semibold hover:underline text-slate-500 dark:text-slate-400 transition">
+                        {{ post.createdAt! | split}}
+                      </button>
+                    }@else{
+                      <button [routerLink]="['/original', post._id]" class="rounded hover:bg-slate-100 dark:hover:bg-slate-800 px-0.5 cursor-pointer py-0.5 text-[.75rem] font-semibold hover:underline text-slate-500 dark:text-slate-400 transition">
+                       {{ post.createdAt! | split}}
+                      </button>
+                    }
+                    .
+                    <span class="inline-flex items-center gap-1 cursor-pointer capitalize">{{ 'privacy.' + post.privacy | translate}}</span>
+                </div>
+            </div>
+            <div class="relative">
+                <button (click)="toggleSavedList(post._id)" class="FavList rounded-full cursor-pointer p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+
+                @if(activeSavedPostId() === post._id){
+                    @if(post.user?._id == SavedUserId()?._id){
+                        <div class="absolute right-0 z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
+                            <button (click)="BookMarkPost(post)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                <i class="fa-regular fa-bookmark text-current"></i>
+                                {{ post.bookmarked ? ('middleContent.Unsave Post' | translate) : ('middleContent.Save Post' | translate) }}
+                            </button>
+                            <button (click)="openEditModal(post)" class="flex w-full items-center cursor-pointer gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                <i class="fa-solid fa-pen-to-square text-current"></i>
+                                {{ "middleContent.Edit Post" | translate }}
+                            </button>
+                            <button (click)="DeleteThePost(post._id)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm font-semibold transition-all duration-200 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50">
+                                <i class="fa-solid fa-trash-can text-current"></i>
+                                {{ "middleContent.Delete Post" | translate }}
+                            </button>
+                        </div>
+                    }@else {
+                        <div class="absolute right-0 z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-lg">
+                            <button (click)="BookMarkPost(post)" class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-[.875rem] transition-all duration-200 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                <i class="fa-regular fa-bookmark text-current"></i>
+                                {{ post.bookmarked ? ('middleContent.Unsave Post' | translate) : ('middleContent.Save Post' | translate) }}
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="mt-3.5">
+            <p class="text-[.875rem] leading-normal text-slate-800 dark:text-slate-100 whitespace-pre-wrap">
+                @if(post.user?._id == SavedUserId()?._id){
+                      <a [routerLink]="['/profile', SavedUserId()?._id]" class="font-bold hover:underline text-slate-900 dark:text-slate-100">{{post.user?.name}}</a>
+                }@else {
+                    <a [routerLink]="['/followers', post.user?._id]" class="font-bold hover:underline text-slate-900 dark:text-slate-100">{{post.user?.name}}</a>
+                }
+                {{ post.body }}
+            </p>
+            @if(post.bookmarked){
+                <div class="mt-3 inline-flex items-center gap-1 rounded-full bg-[#e7f3ff] dark:bg-blue-950 px-2.5 py-1 text-[11px] font-bold text-[#1877f2] dark:text-blue-400">
+                    <i class="fa-regular fa-bookmark text-current"></i>
+                    {{ "middleContent.Saved" | translate }}
+                </div>
+            }
+        </div>
+
+            @if (post.image) {
+            <div class="mt-3.5 overflow-hidden rounded-xl">
+                <app-post-image [src]="post.image" imgClass="max-h-140 w-full object-cover rounded-xl" />
+            </div>
+            }
+
+        @if (post.sharedPost) {
+        <div class="mx-4 my-3 overflow-hidden rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+            <div class="p-3">
+                <div class="mb-2 flex items-center gap-2">
+                    <img [src]="post.sharedPost.user?.photo" [alt]="post.sharedPost.user?.name" class="h-9 object-cover w-9 rounded-full">
+                    <div class="min-w-0">
+                        <h2 class="text-slate-900 dark:text-slate-100 text-[.875rem] font-bold">{{ post.sharedPost.user?.name }}</h2>
+                        <p class="truncate text-slate-500 dark:text-slate-400 text-[.75rem]">
+                            &#64;{{ post.sharedPost.user?.username }}
+                        </p>
+                    </div>
+                    <button [routerLink]="['/original', post.sharedPost._id]" class="ml-auto inline-flex cursor-pointer gap-1 rounded-lg px-2 py-1 text-[.75rem] items-center hover:bg-[#e7f3ff] dark:hover:bg-slate-800 font-bold text-[#1877f2] dark:text-blue-400">
+                        {{ "middleContent.Original Post" | translate }}
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </div>
+                <h2 class="whitespace-pre-wrap text-[.875rem] leading-normal text-slate-800 dark:text-slate-200">{{ post.sharedPost.body }}</h2>
+            </div>
+            @if (post.sharedPost.image) {
+            <div class="border-t border-slate-200 dark:border-slate-800">
+                <button class="group relative block w-full cursor-pointer">
+                    <img [src]="post.sharedPost.image" (click)="openImageModal(post.sharedPost.image)" alt="Shared Image" class="max-h-140 w-full object-cover">
+                    <div class="pointer-events-none absolute inset-0 bg-black/0 transition-all group-hover:bg-black/5"></div>
+                </button>
+            </div>
+            }
+        </div>
+        }
+
+        <div class="px-4 pb-2 text-slate-500 dark:text-slate-400 pt-3 text-[.875rem]">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <div class="inline-flex h-5 w-5 rounded-full items-center justify-center bg-[#1877f2] text-white">
+                        <i class="fa-regular fa-thumbs-up text-[10px]"></i>
+                    </div>
+                    <button class="font-semibold transition hover:text-[#1877f2] dark:hover:text-blue-400 cursor-pointer">
+                        {{ post.likesCount }} {{ "middleContent.Likes" | translate }}
+                    </button>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 text-[.75rem] sm:gap-3 sm:text-[.875rem]">
+                    <h2 class="inline-flex items-center gap-1">
+                        <i class="fa-solid fa-retweet"></i>
+                        {{ post.sharesCount }} {{ "middleContent.shares" | translate }}
+                    </h2>
+                    <span>{{ post.commentsCount }} {{ "middleContent.comments" | translate }}</span>
+                    @if(post.isShare){
+                        <button [routerLink]="['/viewdetails', post._id]" class="px-2 py-1 text-[.75rem] rounded-md cursor-pointer font-bold hover:bg-[#e7f3ff] dark:hover:bg-slate-800 text-[#1877f2] dark:text-blue-400">
+                            {{ "middleContent.View details" | translate }}
+                        </button>
+                    }@else {
+                        <button [routerLink]="['/original', post._id]" class="px-2 py-1 text-[.75rem] rounded-md cursor-pointer font-bold hover:bg-[#e7f3ff] dark:hover:bg-slate-800 text-[#1877f2] dark:text-blue-400">
+                            {{ "middleContent.View details" | translate }}
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-slate-200 dark:border-slate-800 border-t mx-4"></div>
+    <div class="border-slate-200 dark:border-slate-800 border-t mx-4"></div>
+
+<app-post-actions 
+    [post]="post"
+    [currentUserId]="SavedUserId()?._id"
+    (likeUpdated)="updateLocalPost($event)"
+/>
+
+</div>
+}
+
+@empty {
+    <div class="space-y-5 mt-5">
+    <div class="rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg bg-white dark:bg-slate-900 p-10 text-center text-slate-500 dark:text-slate-400">
+          {{ "middleContent.No posts yet. Be the first one to publish." | translate }}
+     </div>
+    </div>
+}
+
+<div class="h-4"></div>
+
+<!-- Intersection observer element & smooth loading footer -->
+<div #myElement class="py-5 flex flex-col items-center justify-center">
+  @if (currentpage() < allPages()) {
+    <!-- Sleek, minimal loading indicator -->
+    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-100 dark:border-slate-800 shadow-sm">
+      <div class="w-4 h-4 border-2 border-slate-200 dark:border-slate-700 border-t-slate-600 dark:border-t-slate-300 rounded-full animate-spin"></div>
+      <span class="text-xs font-medium text-slate-500 dark:text-slate-400 tracking-wide">
+        Loading more...
+      </span>
+    </div>
+  } @else {
+    <!-- Clean, non-intrusive end-of-feed message -->
+    <div class="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs font-medium py-2">
+      <span class="h-px w-8 bg-slate-200 dark:bg-slate-800"></span>
+      <span>You've reached the end</span>
+      <span class="h-px w-8 bg-slate-200 dark:bg-slate-800"></span>
+    </div>
+  }
+</div>
+
+@if (selectedImage()) {
+    <div 
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-all"
+        (click)="closeImageModal()"
+    >
+        <button 
+            (click)="closeImageModal()" 
+            class="absolute top-4 right-4 cursor-pointer flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors"
+        >
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <div class="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-xl shadow-2xl" (click)="$event.stopPropagation()">
+            <img 
+                [src]="selectedImage()" 
+                alt="Enlarged view" 
+                class="max-h-[90vh] max-w-[90vw] object-contain rounded-xl"
+            >
+        </div>
+    </div>
+}
+
+@if(showShareModal() && SharredPosted()){
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 p-4">
+    <div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 animate-fadeIn">
+        
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-5 py-4 bg-slate-50 dark:bg-slate-950">
+            <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">
+                {{ "middleContent.Share Post" | translate }}
+            </h3>
+            <button (click)="CloseSharredModel()" class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 transition cursor-pointer">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+        </div>
+
+        <div class="p-5 space-y-4 max-h-[75vh] overflow-y-auto">
+            <div>
+                <textarea #sharedTextBody rows="3" [placeholder]="'placeholders.saySomething' | translate" class="w-full resize-none border-0 bg-transparent text-sm font-normal text-slate-800 dark:text-slate-100 outline-none placeholder:text-slate-400 leading-relaxed p-0 focus:ring-0"></textarea>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shadow-sm">
+                <div class="p-3.5 flex items-center gap-3 border-b border-slate-200/60 dark:border-slate-800 bg-white dark:bg-slate-900">
+                    <img [src]="SharredPosted().user?.photo" alt="Author" class="h-10 w-10 rounded-full object-cover">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100">{{SharredPosted().user?.name}}</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">{{SharredPosted().createdAt! | split}} · {{'privacy.' + SharredPosted().privacy | translate}}</p>
+                    </div>
+                </div>
+
+                <div class="p-3.5">
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
+                       {{SharredPosted().body}}
+                    </p>
+                </div>
+
+                    @if (SharredPosted().sharedPost?.image) {
+                    <div class="border-t border-slate-200 dark:border-slate-800">
+                        <app-post-image [src]="SharredPosted().sharedPost?.image!" imgClass="max-h-140 w-full object-cover" />
+                    </div>
+                    }
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 border-t border-slate-200 dark:border-slate-800 px-5 py-3.5 bg-slate-50 dark:bg-slate-950">
+            <button 
+                type="button" 
+                (click)="CloseSharredModel()"
+                class="rounded-xl px-5 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition cursor-pointer">
+                {{ "middleContent.Cancel" | translate }}
+            </button>
+            
+            <button 
+                type="button" 
+                (click)="SharredPost(SharredPosted()._id); CloseSharredModel()"
+                class="inline-flex items-center gap-1.5 rounded-xl bg-[#1877f2] px-6 py-2 text-xs font-bold text-white shadow-md hover:bg-[#166fe5] transition cursor-pointer">
+                <i class="fa-solid fa-share text-xs"></i>
+                {{ "middleContent.Share Now" | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if(showEditModal()){
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 p-4">
+        <div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 animate-fadeIn">
+            
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-5 py-4 bg-slate-50 dark:bg-slate-950">
+                <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">
+                    {{ "middleContent.Edit Post" | translate }}
+                </h3>
+                <button (click)="closeEditModal()" class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 transition cursor-pointer">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-4 max-h-[75vh] overflow-y-auto">
+                <div>
+                    <textarea [formControl]="EditPostBody" rows="4" class="w-full resize-none border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-sm font-normal text-slate-800 dark:text-slate-100 outline-none p-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#1877f2]"></textarea>
+                </div>
+
+                @if(EditImagePreview()){
+                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                        <img [src]="EditImagePreview()" alt="Preview" class="w-full max-h-60 object-cover">
+                        <button type="button" (click)="EditImagePreview.set(null); EditImageFile.set(null)" class="absolute cursor-pointer top-3 right-3 flex justify-center items-center h-8 w-8 rounded-full text-white bg-black/60 hover:bg-black/80 transition-colors">
+                           <i class="fa-solid fa-xmark text-sm"></i>
+                        </button>
+                    </div>
+                }
+
+                <div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-3">
+                    <label class="relative overflow-hidden flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all font-normal text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        <i class="fa-regular fa-image text-[17px] text-emerald-600"></i>
+                        <span>{{ "middleContent.Photo/video" | translate }}</span>                      
+                        <input (change)="ReadEditUploadedImg($event)" type="file" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 border-t border-slate-200 dark:border-slate-800 px-5 py-3.5 bg-slate-50 dark:bg-slate-950">
+                <button 
+                    type="button" 
+                    (click)="closeEditModal()"
+                    class="rounded-xl px-5 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition cursor-pointer">
+                    {{ "middleContent.Cancel" | translate }}
+                </button>
+                
+                <button 
+                    type="button" 
+                    (click)="submitUpdatePost()"
+                    class="inline-flex items-center gap-1.5 rounded-xl bg-[#1877f2] px-6 py-2 text-xs font-bold text-white shadow-md hover:bg-[#166fe5] transition cursor-pointer">
+                    <i class="fa-solid fa-check text-xs"></i>
+                    {{ "middleContent.Update" | translate }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+}

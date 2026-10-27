@@ -1,0 +1,219 @@
+{
+  "navbar": {
+    "Route Posts": "منشورات رووت ",
+    "Feed": "الرئيسية",
+    "Profile": "الملف الشخصي",
+    "Notifications": "الإشعارات",
+    "Sittings": "الإعدادات",
+    "Logout": "تسجيل الخروج"
+  } ,
+
+  "leftside": {
+    "Feed": "الرئيسية",
+    "My Posts": "منشوراتي",
+    "Community": "المجتمع",
+    "Saved": "المحفوظات"
+  } ,
+
+  "rightside": {
+    "Suggested Friends": "الأصدقاء المقترحون",
+    "Search friends...": "البحث عن أصدقاء...",
+    "Follow": "متابعة",
+    "followers": "متابع",
+    "mutual": "مشترك",
+    "No users found": "لم يتم العثور على مستخدمين",
+    "We couldn't find any results matching your search.": "لم نتمكن من العثور على أي نتائج تطابق بحثك.",
+    "View more": "عرض المزيد"
+  } , 
+  "middleContent": {
+    "Public": "عام",
+    "Followers": "المتابعون",
+    "Only Me": "أنا فقط",
+    "Photo/video": "صورة/فيديو",
+    "Feeling/activity": "شعور/نشاط",
+    "Post": "نشر",
+    "Save Post": "حفظ المنشور",
+    "Unsave Post": "إلغاء حفظ المنشور",
+    "Edit Post": "تعديل المنشور",
+    "Delete Post": "حذف المنشور",
+    "Saved": "محفوظ",
+    "Original Post": "المنشور الأصلي",
+    "Likes": "إعجابات",
+    "shares": "مشاركات",
+    "comments": "تعليقات",
+    "View details": "عرض التفاصيل",
+    "No posts yet. Be the first one to publish.": "لا توجد منشورات بعد. كن أول من ينشر.",
+    "Previous": "السابق",
+    "Next": "التالي",
+    "Share Post": "مشاركة المنشور",
+    "Say something about this post...": "اكتب شيئاً عن هذا المنشور...",
+    "Cancel": "إلغاء",
+    "Share Now": "مشاركة الآن"
+  } ,
+
+  "postActions": {
+    "Like": "إعجاب",
+    "Comment": "تعليق",
+    "Share": "مشاركة",
+    "Loading comments...": "جاري تحميل التعليقات...",
+    "Share Post": "مشاركة المنشور",
+    "Say something about this post...": "اكتب شيئاً عن هذا المنشور...",
+    "Cancel": "إلغاء",
+    "Share Now": "مشاركة الآن"
+  } , 
+
+  "timeAgo": {
+    "justNow": "الآن",
+    "m": "دقيقة",
+    "h": "ساعة",
+    "d": "يوم",
+    "y": "سنة"
+  },
+
+  "placeholders": {
+    "whatsOnYourMind": "بماذا تفكر يا {{name}}؟",
+    "searchFriends": "البحث عن أصدقاء...",
+    "saySomething": "اكتب شيئاً عن هذا المنشور..."
+  },
+  "comments": {
+    "Comments": "التعليقات",
+    "Most relevant": "الأكثر صلة",
+    "Newest": "الأحدث",
+    "Like": "إعجاب",
+    "Reply": "رد",
+    "Hide replies": "إخفاء الردود",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "No replies yet.": "لا توجد ردود بعد.",
+    "Replying to": "الرد على",
+    "Write a reply...": "اكتب ردّاً...",
+    "No comments yet": "لا توجد تعليقات بعد",
+    "Be the first one to share your thoughts on this post!": "كن أول من يشارك برأيه في هذا المنشور!",
+    "commentAs": "التعليق باسم {{name}}",
+    "Edit Comment": "تعديل التعليق",
+    "Editing as": "التعديل باسم",
+    "Add to your comment": "إضافة إلى تعليقك",
+    "Cancel": "إلغاء",
+    "Save Changes": "حفظ التغييرات"
+  } , 
+  "months": {
+    "1": "يناير",
+    "2": "فبراير",
+    "3": "مارس",
+    "4": "أبريل",
+    "5": "مايو",
+    "6": "يونيو",
+    "7": "يوليو",
+    "8": "أغسطس",
+    "9": "سبتمبر",
+    "10": "أكتوبر",
+    "11": "نوفمبر",
+    "12": "ديسمبر"
+  },
+  "time": {
+    "am": "ص",
+    "pm": "م"
+  } , 
+  "profile": {
+    "Add cover": "إضافة غلاف",
+    "Route Posts member": "عضو في رووت بورتس",
+    "Followers": "المتابعون",
+    "Following": "المتابَعون",
+    "Bookmarks": "المحفوظات",
+    "About": "حول",
+    "Active on Route Posts": "نشط في رووت بورتس",
+    "My posts": "منشوراتي",
+    "Saved posts": "المنشورات المحفوظة",
+    "My Posts": "منشوراتي",
+    "Saved": "المحفوظات",
+    "View details": "عرض التفاصيل",
+    "likes": "إعجابات",
+    "shares": "مشاركات",
+    "comments": "تعليقات"
+  },
+  "notifications": {
+    "Notifications": "الإشعارات",
+    "Realtime updates for likes, comments, shares, and follows.": "تحديثات فورية للإعجابات، التعليقات، المشاركات، والمتابعات.",
+    "Mark all as read": "تحديد الكل كمقروء",
+    "All": "الكل",
+    "Unread": "غير مقروءة",
+    "Read": "مقروء",
+    "Mark as read": "تحديد كمقروء",
+    "No notifications yet": "لا توجد إشعارات بعد",
+    "When you get new notifications, they’ll show up here. Stay tuned!": "عندما تتلقى إشعارات جديدة، ستظهر هنا. ترقبونا!"
+  },
+  "followers": {
+    "Back": "رجوع",
+    "Following": "متابَع",
+    "Follow": "متابعة",
+    "Save Post": "حفظ المنشور",
+    "Unsave Post": "إلغاء حفظ المنشور",
+    "Edit Post": "تعديل المنشور",
+    "Delete Post": "حذف المنشور",
+    "Original Post": "المنشور الأصلي",
+    "Likes": "إعجابات",
+    "shares": "مشاركات",
+    "comments": "تعليقات",
+    "View details": "عرض التفاصيل",
+    "No posts yet": "لا توجد منشورات بعد"
+  } , 
+
+  "privacy": {
+    "public": "عام",
+    "following": "المتابعون",
+    "followers": "المتابعون",
+    "only_me": "أنا فقط"
+  },
+  "suggestions": {
+    "Back to feed": "العودة إلى الرئيسية",
+    "All Suggested Friends": "جميع الأصدقاء المقترحين",
+    "Follow": "متابعة",
+    "followers": "متابعون",
+    "mutual": "مشترك",
+    "Load more users": "تحميل المزيد من المستخدمين",
+    "You are all Set": "لقد استعرضت كل شيء"
+  },
+  "viewDetails": {
+    "Back": "رجوع",
+    "Save Post": "حفظ المنشور",
+    "Unsave Post": "إلغاء حفظ المنشور",
+    "Edit Post": "تعديل المنشور",
+    "Delete Post": "حذف المنشور",
+    "Original Post": "المنشور الأصلي",
+    "Likes": "إعجابات",
+    "shares": "مشاركات",
+    "comments": "تعليقات",
+    "View details": "عرض التفاصيل",
+    "Post is no longer available": "هذا المنشور لم يعد متاحاً",
+    "This post may have been deleted, or you might not have permission to view it.": "ربما تم حذف هذا المنشور، أو قد لا تملك صلاحية لعرضه.",
+    "Go Back": "الرجوع للخلف"
+  },
+  "originalPost": {
+    "Back": "رجوع",
+    "Save Post": "حفظ المنشور",
+    "Unsave Post": "إلغاء حفظ المنشور",
+    "Edit Post": "تعديل المنشور",
+    "Delete Post": "حذف المنشور",
+    "Likes": "إعجابات",
+    "Shares": "مشاركات",
+    "comments": "تعليقات",
+    "This content isn't available": "هذا المحتوى غير متوفر",
+    "When this happens, it's usually because the owner only shared it with a small group, changed who can see it, or it has been deleted.": "عندما يحدث ذلك، يكون عادةً لأن المالك شاركه مع مجموعة صغيرة فقط، أو غيّر إعدادات الخصوصية، أو تم حذفه.",
+    "Go Back": "الرجوع للخلف",
+    "Back to Feed": "العودة إلى الرئيسية"
+  } , 
+  "settings": {
+    "Change Password": "تغيير كلمة المرور",
+    "Keep your account secure by using a strong password.": "حافظ على أمان حسابك باستخدام كلمة مرور قوية.",
+    "Current Password": "كلمة المرور الحالية",
+    "Enter new password": "أدخل كلمة المرور الجديدة",
+    "New password is required.": "كلمة المرور الجديدة مطلوبة.",
+    "At least 8 characters with uppercase, lowercase, number, and special character": "8 أحرف على الأقل تحتوي على حروف كبيرة وصغيرة وأرقام ورمز خاص",
+    "New password": "كلمة المرور الجديدة",
+    "Confirm new password": "تأكيد كلمة المرور الجديدة",
+    "Re-enter new password": "إعادة إدخال كلمة المرور الجديدة",
+    "Please confirm your new password.": "يرجى تأكيد كلمة المرور الجديدة.",
+    "Passwords don't match.": "كلمات المرور غير متطابقة.",
+    "Update Password": "تحديث كلمة المرور"
+  }
+}

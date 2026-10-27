@@ -1,0 +1,114 @@
+<section class="Main min-h-screen bg-[#f0f2f5] px-4 py-8 sm:py-12 lg:flex lg:items-center">
+    <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-5 sm:gap-7 lg:flex-row lg:items-center lg:justify-between">
+        <div class="order-2 w-full max-w-xl text-center lg:order-1 lg:text-left">
+            <h1 class="text-5xl font-bold text-[#00298d] sm:text-6xl lg:block">
+                Route Posts
+            </h1>
+            <p class=" mt-4 text-2xl font-medium ug text-slate-800 lg:block">
+                Connect with friends and the world around you on Route Posts.
+            </p>
+            <div class="mt-6 rounded-2xl border border-[#c9d5ff] bg-white/60 p-3 shadow-sm  sm:p-5">
+                <p class="text-sm uppercase font-bold text-[#00298d]">About Route Academy</p>
+                <p class="mt-2 text-lg font-bold text-slate-900">
+                    Egypt's Leading IT Training Center Since 2012
+                </p>
+                <h2 class="mt-2 text-sm  text-slate-700">
+                    Route Academy is the premier IT training center in Egypt, established in 2012. We specialize in delivering high-quality training courses in programming, web development, and application development. We've identified the unique challenges people may face when learning new technology and made efforts to provide strategies to overcome them.
+                </h2>
+                <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    <div class="rounded-xl border border-[#c9d5ff] bg-[#f2f6ff] px-3 py-2">
+                        <h2 class="text-base font-bold text-[#00298d]">2012</h2>
+                        <p class="text-[11px] font-bold uppercase tracking-wide text-slate-600">
+                            Founded
+                        </p>
+                    </div>
+                    <div class="rounded-xl border border-[#c9d5ff] bg-[#f2f6ff] px-3 py-2">
+                        <h2 class="text-base font-bold text-[#00298d]">40K+</h2>
+                        <p class="text-[11px] font-bold uppercase tracking-wide text-slate-600">
+                            Graduates
+                        </p>
+                    </div>
+                    <div class="rounded-xl border border-[#c9d5ff] bg-[#f2f6ff] px-3 py-2">
+                        <h2 class="text-base font-bold text-[#00298d]">50+</h2>
+                        <p class="text-[11px] font-bold uppercase tracking-wide text-slate-600">
+                            Partner Companies
+                        </p>
+                    </div>
+                    <div class="rounded-xl border border-[#c9d5ff] bg-[#f2f6ff] px-3 py-2">
+                        <h2 class="text-base font-bold text-[#00298d]">5</h2>
+                        <p class="text-[11px] font-bold uppercase tracking-wide text-slate-600">
+                            Branches
+                        </p>
+                    </div>
+                    <div class="rounded-xl border border-[#c9d5ff] bg-[#f2f6ff] px-3 py-2">
+                        <h2 class="text-base font-bold text-[#00298d]">20</h2>
+                        <p class="text-[11px] font-bold uppercase tracking-wide text-slate-600">
+                            Diplomas Available
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-1 w-full max-w-106 lg:order-2">
+            <div class="rounded-2xl bg-white p-5 sm:p-5">
+                 <div class="mb-6 grid grid-cols-2 rounded-xl bg-slate-200 p-2">
+                    <button routerLink="/login" class="rounded-lg py-2 cursor-pointer text-sm font-extrabold transition bg-white text-[#00298d] shadow-sm">Login</button>
+                    <button routerLink="/register" class="rounded-lg py-2 cursor-pointer text-sm font-extrabold transition text-slate-600 hover:text-slate-800">Register</button>
+                 </div>
+                 <h2 class="text-[1.5rem] font-bold text-slate-900">
+                    Log in to Route Posts
+                 </h2>
+                 <p class="mt-2 text-sm text-slate-500">Log in and continue your social journey.</p>
+                 <form [formGroup]="loginForm" (ngSubmit)="Login()" class="mt-6 space-y-4">
+                    <div>
+                        <div class="relative mt-3">
+                            <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                                <i class="fa-regular fa-user border-slate-100"></i>
+                            </span>
+                             <input formControlName="email"  placeholder="Email address" type="email" class="w-full rounded-xl placeholder:text-gray-400 border bg-slate-50 py-3.5 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]">
+                        </div>
+                            @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched){
+                                @if(loginForm.get('email')?.hasError('required')){
+                                    <p class="mt-1.5 text-xs font-semibold text-rose-600 animate-slide-down">Email address is required.</p>
+                                }
+                                @if(loginForm.get('email')?.hasError('email')){
+                                    <p class="mt-1.5 text-xs font-semibold text-rose-600 animate-slide-down">Please enter a valid email address.</p>
+                                }
+                            }
+
+                        <div class="relative mt-3">
+                            <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                                <i class="fa-solid fa-key  text-slate-400"></i>
+                            </span>
+                            <input formControlName="password" type="password" placeholder="password" class="w-full placeholder:text-gray-400 rounded-xl border bg-slate-50 py-3 pl-11 pr-3 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]">
+                        </div>
+                            @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+                                @if(loginForm.get('password')?.hasError('required')){
+                                    <p class="mt-1.5 text-xs font-semibold text-rose-600 animate-slide-down">Password is required.</p>
+                                }
+                                @if(loginForm.get('password')?.hasError('pattern')){
+                                    <p class="mt-1.5 text-xs font-semibold text-rose-600 animate-slide-down">
+                                        Password must be at least 8 characters and include uppercase, lowercase, number, and special character.
+                                    </p>
+                                }
+                            }
+
+                        <button type="submit" class="w-full cursor-pointer rounded-xl py-2.5 mt-3 text-base font-extrabold text-white transition disabled:opacity-55 bg-[#00298d] hover:bg-[#001f6b]">Log in</button>
+                        <button class="mx-auto  mt-3 block text-sm font-semibold text-[#00298d] transition hover:underline">Forgot password?</button>
+                    </div>  
+                         @if(errorMesage()){
+                            <div class="flex items-center gap-3 mt-4 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-rose-800 shadow-sm transition-all animate-slide-down mb-4">
+                                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-100 text-rose-600">
+                                    <i class="fa-solid fa-triangle-exclamation text-base"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-bold">Login Error</h4>
+                                    <p class="text-xs text-rose-600/90 mt-0.5">{{ errorMesage() }}</p>
+                                </div>
+                            </div>
+                        }     
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

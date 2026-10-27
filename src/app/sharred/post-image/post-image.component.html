@@ -1,0 +1,13 @@
+<img [src]="src()" [alt]="alt()" [class]="'block cursor-zoom-in ' + imgClass()" (click)="open()">
+
+<dialog #dlg
+        (click)="onBackdropClick($event)"
+        class="m-0 h-screen w-screen max-h-none max-w-none items-center justify-center bg-transparent p-0 open:flex backdrop:bg-black/80 backdrop:backdrop-blur-sm">
+
+  <button (click)="close()"
+          class="absolute top-4 right-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/80">
+    <i class="fa-solid fa-xmark text-lg"></i>
+  </button>
+
+  <img [src]="src()" [alt]="alt()" class="max-h-[90vh] max-w-[90vw] rounded-xl object-contain shadow-2xl">
+</dialog>

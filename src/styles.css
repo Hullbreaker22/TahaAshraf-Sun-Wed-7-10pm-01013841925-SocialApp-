@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@import 'ngx-toastr/toastr';
+
+
+@variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('./fonts/Cairo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('./fonts/Cairo-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('./fonts/Cairo-Bold.ttf') format('truetype');
+  font-weight: 700; 
+  font-style: normal;
+}
+@layer base {
+  body {
+    font-family: 'Cairo', sans-serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#toast-container > .ngx-toastr {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+  font-family: inherit;
+  font-size: 0.875rem;
+  opacity: 1;
+}
+
+#toast-container > .toast-success { background-color: #1877f2; }
+#toast-container > .toast-error   { background-color: #e11d48; }
+#toast-container > .toast-warning { background-color: #f59e0b; }
+#toast-container > .toast-info    { background-color: #0ea5e9; }
+
+#toast-container .toast-title   { font-weight: 800; }
+#toast-container .toast-message { font-weight: 500; }

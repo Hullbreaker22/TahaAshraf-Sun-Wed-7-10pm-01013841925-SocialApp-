@@ -1,0 +1,54 @@
+<section class="flex min-h-[85vh] items-center justify-center px-4 py-12">
+  <div class="w-full max-w-xl text-center">
+    
+    <div class="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-200/50 sm:p-12">
+      
+      <div class="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-blue-50/60 blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-slate-100/80 blur-2xl"></div>
+
+      <div class="relative z-10">
+        <div class="mb-4 inline-flex items-center justify-center gap-1 font-black leading-none text-slate-900">
+          <span class="text-7xl sm:text-8xl tracking-tighter">4</span>
+          
+          <div class="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-[#e7f3ff] text-[#1877f2] shadow-inner">
+            <i class="fa-solid fa-[#1877f2] fa-compass text-3xl sm:text-4xl animate-spin" style="animation-duration: 10s;"></i>
+          </div>
+
+          <span class="text-7xl sm:text-8xl tracking-tighter">4</span>
+        </div>
+
+        <h1 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+          Page Not Found
+        </h1>
+
+        <p class="mx-auto mt-3 max-w-md text-sm font-medium leading-relaxed text-slate-500">
+          Oops! The page or post you are looking for doesn't exist, has been removed, or the link might be broken.
+        </p>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          
+          <button 
+            (click)="goBack()"
+            class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-5 py-3 text-sm font-extrabold text-slate-700 transition hover:bg-slate-100 sm:w-auto">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            Go Back
+          </button>
+
+          <a 
+            routerLink="/" 
+            class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#1877f2] px-6 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-500/20 transition hover:bg-[#166fe5] sm:w-auto">
+            <i class="fa-solid fa-house text-xs"></i>
+            Back to Home
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <p class="mt-6 text-xs font-semibold text-slate-400">
+      Need help? Double check the URL or try searching again.
+    </p>
+
+  </div>
+</section>

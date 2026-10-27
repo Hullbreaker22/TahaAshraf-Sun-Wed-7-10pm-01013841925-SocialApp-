@@ -1,0 +1,81 @@
+<section class="hidden xl:top-21 h-fit xl:sticky xl:block">
+    <div class="rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 transition-colors">
+        <div class="mb-3 gap-2 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-user-group text-[#1877f2]"></i>
+                <p class="font-bold text-slate-900 dark:text-slate-100">{{ "rightside.Suggested Friends" | translate }}</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <p class="rounded-full bg-slate-100 dark:bg-slate-800 text-[.75rem] px-2 py-0.5 font-bold text-slate-600 dark:text-slate-300">{{SuggestedList().length}}</p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass top-[50%] -translate-y-1/2 pointer-events-none absolute left-3 text-slate-400 dark:text-slate-500"></i>
+                <input #SearchInput (input)="setFilterValue()" [placeholder]="'rightside.Search friends...' | translate" type="text" class="w-full placeholder:text-gray-400 dark:placeholder:text-slate-500 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 focus:border-[#1877f2] py-2 pl-9 pr-3 text-[.875rem] text-slate-700 dark:text-slate-200 outline-none focus:bg-white dark:focus:bg-slate-900 transition-colors">
+            </div>
+        </div>
+
+        <div>
+            @for(user of SuggestedList().slice(0,5); track user._id){
+             <div class="rounded-xl mt-3 p-2.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors">
+                <div class="flex justify-between items-center gap-1">
+                    <button class="flex rounded-lg cursor-pointer min-w-0 hover:bg-slate-50 dark:hover:bg-slate-800 items-center gap-2 px-1.5 py-1 text-left transition-all">
+                        @if(user._id == LocalUser()._id){
+                            <a [routerLink]="['/profile', user._id]"><img [src]="user.photo" class="h-10 w-10 rounded-full object-cover" alt="firstpic"></a>
+                        }@else {
+                            <a [routerLink]="['/followers',user._id]"><img [src]="user.photo" class="h-10 w-10 rounded-full object-cover" alt="firstpic"></a>
+                        }
+
+                        <div class="min-w-0">
+                            @if(user._id == LocalUser()._id){
+                                <a [routerLink]="['/profile',user._id]" class="truncate text-[.875rem] font-bold text-slate-900 dark:text-slate-100 hover:underline">
+                                    {{user.name}}
+                                </a>
+                            }@else {
+                                <a [routerLink]="['/followers',user._id]" class="truncate text-[.875rem] font-bold text-slate-900 dark:text-slate-100 hover:underline">
+                                    {{user.name}}
+                                </a>
+                            }
+                            <p class="text-slate-500 dark:text-slate-400 text-[.75rem] truncate">{{user.username}}</p>
+                        </div>
+                    </button>
+
+                    <button (click)="FollowUnfollowUser(user._id)" class="inline-flex items-center gap-1 rounded-full cursor-pointer px-3 text-[#1877f2] dark:text-blue-400 py-1.5 text-[.75rem] hover:bg-[#d8ebff] dark:hover:bg-blue-950 font-bold transition-all disabled:opacity-60 bg-[#e7f3ff] dark:bg-blue-950/60">
+                        <i class="fa-solid fa-user-plus text-current"></i>
+                        {{ "rightside.Follow" | translate }}
+                       @if(isLoading()){
+                         <i class="fa-solid fa-spinner fa-spin"></i>
+                       }
+                    </button>
+
+                </div>
+                <div class="mt-3 flex items-center font-semibold gap-2.5 text-[.6875rem] text-slate-500 dark:text-slate-400">
+                    <p class="rounded-full py-1 bg-slate-100 dark:bg-slate-800 px-2">
+                        {{user.followersCount}} {{ "rightside.followers" | translate }}
+                    </p>
+                    <span class="rounded-full bg-[#edf4ff] dark:bg-blue-950/60 px-2 py-0.5 text-[#1877f2] dark:text-blue-400">
+                        {{user.mutualFollowersCount}} {{ "rightside.mutual" | translate }}
+                    </span>
+                </div>
+            </div>
+            }@empty {
+                <div class="flex flex-col items-center justify-center py-8 px-4 text-center bg-slate-50/50 dark:bg-slate-950/50 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 mt-2">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 mb-3 shadow-inner">
+                    <i class="fa-solid fa-user-slash text-xl"></i>
+                    </div>
+                    
+                    <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200">{{ "rightside.No users found" | translate }}</h3>
+                    
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-50 leading-relaxed">
+                    {{ "rightside.We couldn't find any results matching your search." | translate }}
+                    </p>
+                </div>
+            }
+
+            <button routerLink="/suggestions" class="mt-3 cursor-pointer inline-flex w-full items-center justify-center gap-2 text-[.875rem] rounded-xl border hover:bg-slate-100 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 font-bold text-slate-700 dark:text-slate-200 transition-all">
+                {{ "rightside.View more" | translate }}
+            </button>
+        </div>
+    </div>
+</section>

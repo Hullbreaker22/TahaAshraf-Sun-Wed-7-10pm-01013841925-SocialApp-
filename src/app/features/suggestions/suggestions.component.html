@@ -1,0 +1,67 @@
+<section class="mx-auto max-w-7xl px-3 py-3.5">
+    <div class="min-w-0">
+        <div class="mx-auto max-w-4xl space-y-4"> 
+            <button (click)="goBack()" class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-[.875rem] font-bold text-slate-700 dark:text-slate-200 transition hover:bg-slate-50 dark:hover:bg-slate-800">
+                <i class="fa-solid fa-arrow-left-long text-current"></i>
+                {{ "suggestions.Back to feed" | translate }}
+            </button>
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm transition-colors">
+                <div class="mb-3 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 text-xl font-extrabold text-slate-900 dark:text-slate-100">
+                        <i class="fa-solid fa-user-group text-[#1877f2] dark:text-blue-400 text-[.9375rem]"></i>
+                        {{ "suggestions.All Suggested Friends" | translate }}
+                    </div>
+                    <div class="rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[.75rem] font-bold text-slate-600 dark:text-slate-300">
+                        {{FilteredList().length}}
+                    </div>
+                </div>
+                <label class="relative mb-4 block">
+                    <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500"></i>
+                    <input type="text" name="" id="" [(ngModel)]="SeatchBar" (input)="SearchFunction()" [placeholder]="'placeholders.searchFriends' | translate" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 py-2.5 pl-10 pr-3 text-[.75rem] text-slate-700 dark:text-slate-200 outline-none focus:border-[#1877f2] dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-colors">
+                </label>
+                <div class="grid gap-3 sm:grid-cols-2">
+                     @for(user of FilteredList(); track user._id){
+                     <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-3 bg-white dark:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-3 justify-between">
+                            <h2 class="flex min-w-0 items-center gap-3 rounded-lg px-1 py-1 text-left transition-all hover:bg-slate-50 dark:hover:bg-slate-800">
+                                <a [routerLink]="['/followers',user._id]" class="cursor-pointer"><img [src]="user.photo" alt="SuggestionsPic" class="h-12 w-12 rounded-full object-cover"></a>
+                                <div class="min-w-0">
+                                    <a [routerLink]="['/followers',user._id]" class="truncate text-[.75rem] font-bold text-slate-900 dark:text-slate-100 hover:underline">{{user.name}}</a>
+                                    <p class="truncate text-[.75rem] text-slate-500 dark:text-slate-400">
+                                        @{{user.username}} 
+                                    </p>
+                                </div>
+                            </h2>
+                            <button (click)="followUser(user._id)" class="inline-flex items-center gap-1 cursor-pointer rounded-full px-3 py-1.5 text-xs font-bold transition disabled:opacity-60 bg-[#e7f3ff] dark:bg-blue-950 text-[#1877f2] dark:text-blue-400 hover:bg-[#d8ebff] dark:hover:bg-blue-900">
+                                <i class="fa-solid fa-user-plus text-xs"></i>
+                                {{ "suggestions.Follow" | translate }}
+                            </button>
+                        </div>
+                        <div class="mt-2 flex items-center gap-2 text-[.6875rem] font-semibold text-slate-500 dark:text-slate-400">
+                            <h2 class="rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5">
+                                {{user.followersCount}} {{ "suggestions.followers" | translate }}
+                            </h2>
+                            <h2 class="rounded-full bg-[#edf4ff] dark:bg-blue-950/60 px-2 py-0.5 text-[#1877f2] dark:text-blue-400">
+                                {{user.mutualFollowersCount}} {{ "suggestions.mutual" | translate }}
+                            </h2>
+                        </div>
+                    </div>
+                     }
+                </div>
+
+                @if(searchLimit() <= 40){
+                   <button (click)="loadmoreSuggestions()" class="mt-4 cursor-pointer inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-sm font-bold text-slate-700 dark:text-slate-200 transition hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-60">
+                        {{ "suggestions.Load more users" | translate }}
+                  </button>
+                }
+
+            </div>
+                
+                @if (searchLimit() == 50) {
+                    <div class="w-full flex justify-center">
+                        <h2 class="mt-2 text-slate-500 dark:text-slate-400">{{ "suggestions.You are all Set" | translate }}</h2>
+                    </div>
+                }
+        </div>
+    </div>
+</section>
