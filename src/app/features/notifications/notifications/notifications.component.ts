@@ -2,7 +2,6 @@ import { Component, computed, ElementRef, inject, OnInit, signal, viewChild, Wri
 import { NotificationsService } from '../../../core/services/Notifications/notifications.service';
 import { INotific } from '../../../core/Models/Inotific.interface';
 import { RouterLink } from '@angular/router';
-import { Writable } from 'stream';
 import { GlobalService } from '../../../core/services/Global/global.service';
 import { SplitPipe } from '../../../core/Pipes/split-pipe';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -84,7 +83,6 @@ export class NotificationsComponent implements OnInit{
     this.NotificaonBase.getAllNotReaded().subscribe({
       next:(res)=>{
         this.NotReadList.set(res.data.notifications)
-        console.log(res);
         
       },error:(err)=>{
         console.log(err);
@@ -102,7 +100,7 @@ export class NotificationsComponent implements OnInit{
   
     this.NotificaonBase.MarkAsRead(notificationId).subscribe({
       next:(res)=>{
-        console.log(res);
+
          this.getAllReadedNotification();
          this.getAllNotReadedNotification();
         this.GlobalStatus.GetNotRead();

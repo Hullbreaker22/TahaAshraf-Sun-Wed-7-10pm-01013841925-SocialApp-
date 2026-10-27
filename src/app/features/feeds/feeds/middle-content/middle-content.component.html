@@ -267,10 +267,8 @@
 
 <div class="h-4"></div>
 
-<!-- Intersection observer element & smooth loading footer -->
 <div #myElement class="py-5 flex flex-col items-center justify-center">
   @if (currentpage() < allPages()) {
-    <!-- Sleek, minimal loading indicator -->
     <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-100 dark:border-slate-800 shadow-sm">
       <div class="w-4 h-4 border-2 border-slate-200 dark:border-slate-700 border-t-slate-600 dark:border-t-slate-300 rounded-full animate-spin"></div>
       <span class="text-xs font-medium text-slate-500 dark:text-slate-400 tracking-wide">
@@ -278,7 +276,6 @@
       </span>
     </div>
   } @else {
-    <!-- Clean, non-intrusive end-of-feed message -->
     <div class="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs font-medium py-2">
       <span class="h-px w-8 bg-slate-200 dark:bg-slate-800"></span>
       <span>You've reached the end</span>
@@ -287,24 +284,144 @@
   }
 </div>
 
+
 @if (selectedImage()) {
     <div 
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-all"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-0 transition-all"
         (click)="closeImageModal()"
     >
         <button 
             (click)="closeImageModal()" 
-            class="absolute top-4 right-4 cursor-pointer flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors"
+            class="absolute top-4 right-4 z-50 cursor-pointer flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white hover:bg-black transition-colors shadow-lg"
         >
             <i class="fa-solid fa-xmark text-lg"></i>
         </button>
 
-        <div class="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-xl shadow-2xl" (click)="$event.stopPropagation()">
+        <div class="relative w-full h-full flex items-center justify-center" (click)="$event.stopPropagation()">
             <img 
                 [src]="selectedImage()" 
                 alt="Enlarged view" 
-                class="max-h-[90vh] max-w-[90vw] object-contain rounded-xl"
+                class="w-full h-full object-contain sm:max-h-[90vh] sm:max-w-[90vw] sm:rounded-xl shadow-2xl"
             >
+        </div>
+    </div>
+}
+
+@if(showShareModal() && SharredPosted()){
+    <!-- تم إضافة overflow-hidden لمنع الـ scrolling في الخلفية -->
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 p-4 overflow-hidden">
+    <div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 animate-fadeIn max-h-[90vh] flex flex-col">
+        
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-5 py-4 bg-slate-50 dark:bg-slate-950 shrink-0">
+            <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">
+                {{ "middleContent.Share Post" | translate }}
+            </h3>
+            <button (click)="CloseSharredModel()" class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 transition cursor-pointer">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+        </div>
+
+        <div class="p-5 space-y-4 overflow-y-auto flex-1">
+            <div>
+                <textarea #sharedTextBody rows="3" [placeholder]="'placeholders.saySomething' | translate" class="w-full resize-none border-0 bg-transparent text-sm font-normal text-slate-800 dark:text-slate-100 outline-none placeholder:text-slate-400 leading-relaxed p-0 focus:ring-0"></textarea>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shadow-sm">
+                <div class="p-3.5 flex items-center gap-3 border-b border-slate-200/60 dark:border-slate-800 bg-white dark:bg-slate-900">
+                    <img [src]="SharredPosted().user?.photo" alt="Author" class="h-10 w-10 rounded-full object-cover">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100">{{SharredPosted().user?.name}}</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">{{SharredPosted().createdAt! | split}} · {{'privacy.' + SharredPosted().privacy | translate}}</p>
+                    </div>
+                </div>
+
+                <div class="p-3.5">
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
+                       {{SharredPosted().body}}
+                    </p>
+                </div>
+
+                    @if (SharredPosted().sharedPost?.image) {
+                    <div class="border-t border-slate-200 dark:border-slate-800">
+                        <app-post-image [src]="SharredPosted().sharedPost?.image!" imgClass="max-h-140 w-full object-cover" />
+                    </div>
+                    }
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 border-t border-slate-200 dark:border-slate-800 px-5 py-3.5 bg-slate-50 dark:bg-slate-950 shrink-0">
+            <button 
+                type="button" 
+                (click)="CloseSharredModel()"
+                class="rounded-xl px-5 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition cursor-pointer">
+                {{ "middleContent.Cancel" | translate }}
+            </button>
+            
+            <button 
+                type="button" 
+                (click)="SharredPost(SharredPosted()._id); CloseSharredModel()"
+                class="inline-flex items-center gap-1.5 rounded-xl bg-[#1877f2] px-6 py-2 text-xs font-bold text-white shadow-md hover:bg-[#166fe5] transition cursor-pointer">
+                <i class="fa-solid fa-share text-xs"></i>
+                {{ "middleContent.Share Now" | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if(showEditModal()){
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/90 p-4 overflow-hidden">
+        <div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 animate-fadeIn max-h-[90vh] flex flex-col">
+            
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-5 py-4 bg-slate-50 dark:bg-slate-950 shrink-0">
+                <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">
+                    {{ "middleContent.Edit Post" | translate }}
+                </h3>
+                <button (click)="closeEditModal()" class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 transition cursor-pointer">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-4 overflow-y-auto flex-1">
+                <div>
+                    <textarea [formControl]="EditPostBody" rows="4" class="w-full resize-none border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-sm font-normal text-slate-800 dark:text-slate-100 outline-none p-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#1877f2]"></textarea>
+                </div>
+
+                @if(EditImagePreview()){
+                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                        <img [src]="EditImagePreview()" alt="Preview" class="w-full max-h-60 object-cover">
+                        <button type="button" (click)="EditImagePreview.set(null); EditImageFile.set(null)" class="absolute cursor-pointer top-3 right-3 flex justify-center items-center h-8 w-8 rounded-full text-white bg-black/60 hover:bg-black/80 transition-colors">
+                           <i class="fa-solid fa-xmark text-sm"></i>
+                        </button>
+                    </div>
+                }
+
+                <div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-3">
+                    <label class="relative overflow-hidden flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all font-normal text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        <i class="fa-regular fa-image text-[17px] text-emerald-600"></i>
+                        <span>{{ "middleContent.Photo/video" | translate }}</span>                      
+                        <input (change)="ReadEditUploadedImg($event)" type="file" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 border-t border-slate-200 dark:border-slate-800 px-5 py-3.5 bg-slate-50 dark:bg-slate-950 shrink-0">
+                <button 
+                    type="button" 
+                    (click)="closeEditModal()"
+                    class="rounded-xl px-5 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition cursor-pointer">
+                    {{ "middleContent.Cancel" | translate }}
+                </button>
+                
+                <button 
+                    type="button" 
+                    (click)="submitUpdatePost()"
+                    class="inline-flex items-center gap-1.5 rounded-xl bg-[#1877f2] px-6 py-2 text-xs font-bold text-white shadow-md hover:bg-[#166fe5] transition cursor-pointer">
+                    <i class="fa-solid fa-check text-xs"></i>
+                    {{ "middleContent.Update" | translate }}
+                </button>
+            </div>
+
         </div>
     </div>
 }

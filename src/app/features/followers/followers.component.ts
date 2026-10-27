@@ -45,7 +45,6 @@ export class FollowersComponent {
       const id = params.get('id'); 
       if (id) {
         this.ProfileId.set(id);
-        console.log(this.ProfileId());
         
         this.GetProfile();
         this.GetPosts();
@@ -71,8 +70,6 @@ export class FollowersComponent {
   GetProfile() {
     this.UsersBase.getUserProfile(this.ProfileId()).subscribe({
       next: (res) => {
-        console.log(res);
-        console.log(this.ProfileId);
         
         this.Profile.set(res.data.user);                                  
         this.isFollowing.set(res.data.isFollowing ?? res.data.user?.isFollowing ?? false);
@@ -87,7 +84,6 @@ export class FollowersComponent {
   GetPosts() {
     this.PostBase.getMyPosts(this.ProfileId()).subscribe({
       next: (res) => {
-        console.log(res);
         this.Posts.set(res.data.posts);                               
       },
       error: (err) => console.log(err),

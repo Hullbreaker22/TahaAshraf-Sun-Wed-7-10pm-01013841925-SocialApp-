@@ -38,6 +38,7 @@
 </div>
 
         <div class="flex items-center gap-2">
+            <!-- زرار الثيم (Dark/Light) -->
             <button 
               (click)="themeService.toggleTheme()" 
               class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm transition-all duration-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:scale-105 cursor-pointer"
@@ -63,79 +64,46 @@
                     <i class="fa-solid fa-bars text-gray-400 dark:text-slate-400"></i>
                 </button>
 
-              <div #Mainlist class="absolute hidden right-0 rtl:left-0 rtl:right-auto z-50 mt-2 w-52 rounded-xl border shadow-sm border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-2">
-                  <button [routerLink]="['/profile',CurrentUser()._id]" class="flex w-full items-center font-semibold gap-2 cursor-pointer rounded-lg px-3 py-2 text-[.875rem] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rtl:text-right">
-                      <i class="fa-regular fa-user text-slate-700 dark:text-slate-300"></i>
-                      {{ "navbar.Profile" | translate }}
-                  </button>
-                  <button routerLink="/sittings" class="flex cursor-pointer w-full items-center font-semibold gap-2 rounded-lg px-3 py-2 text-[.875rem] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rtl:text-right">
-                      <i class="fa-solid fa-gear text-slate-700 dark:text-slate-300"></i>
-                      {{ "navbar.Sittings" | translate }}
-                  </button>
-                  <div class="my-1 border-t border-slate-200 dark:border-slate-800"></div>
-                  <button (click)="Logout()" class="flex cursor-pointer w-full items-center gap-2 rounded-lg px-3 py-2 text-[.875rem] font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 rtl:text-right">
-                      {{ "navbar.Logout" | translate }}
-                  </button>
-              </div>
+                <div #Mainlist class="absolute hidden right-0 rtl:left-0 rtl:right-auto z-50 mt-2 w-56 rounded-xl border shadow-sm border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-2">
+                    <button [routerLink]="['/profile',CurrentUser()._id]" class="flex w-full items-center font-semibold gap-2 cursor-pointer rounded-lg px-3 py-2 text-[.875rem] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rtl:text-right">
+                        <i class="fa-regular fa-user text-slate-700 dark:text-slate-300"></i>
+                        {{ "navbar.Profile" | translate }}
+                    </button>
+                    <button routerLink="/sittings" class="flex cursor-pointer w-full items-center font-semibold gap-2 rounded-lg px-3 py-2 text-[.875rem] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rtl:text-right">
+                        <i class="fa-solid fa-gear text-slate-700 dark:text-slate-300"></i>
+                        {{ "navbar.Settings" | translate }}
+                    </button>
+
+                    <div class="my-1 border-t border-slate-200 dark:border-slate-800"></div>
+
+                    <div class="px-3 py-1.5 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase">
+                        <i class="fa-solid fa-globe mr-1"></i> Language
+                    </div>
+                    
+                    <button type="button" (click)="changeLanguage('en')"
+                      [class]="lang() === 'en'
+                        ? 'flex w-full items-center justify-between px-3 py-2 text-left rtl:text-right text-xs font-bold text-[#1877f2] bg-blue-50/60 dark:bg-blue-950/60 rounded-lg transition cursor-pointer'
+                        : 'flex w-full items-center justify-between px-3 py-2 text-left rtl:text-right text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition cursor-pointer'">
+                      <span>English</span>
+                      @if (lang() === 'en') { <i class="fa-solid fa-check text-xs"></i> }
+                    </button>
+
+                    <button type="button" (click)="changeLanguage('ar')"
+                      [class]="lang() === 'ar'
+                        ? 'flex w-full items-center justify-between px-3 py-2 text-left rtl:text-right text-xs font-bold text-[#1877f2] bg-blue-50/60 dark:bg-blue-950/60 rounded-lg transition cursor-pointer'
+                        : 'flex w-full items-center justify-between px-3 py-2 text-left rtl:text-right text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition cursor-pointer'">
+                      <span>العربية</span>
+                      @if (lang() === 'ar') { <i class="fa-solid fa-check text-xs"></i> }
+                    </button>
+
+                    <div class="my-1 border-t border-slate-200 dark:border-slate-800"></div>
+
+                    <button (click)="Logout()" class="flex cursor-pointer w-full items-center gap-2 rounded-lg px-3 py-2 text-[.875rem] font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 rtl:text-right">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        {{ "navbar.Logout" | translate }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-
-@if(lang() == 'en'){
-  <div class="absolute languageZone top-3  md:right-15 lg:right-15 right-35   inline-block text-left">
-    <button type="button" (click)="toggleLanguage()" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-xs font-extrabold text-slate-700 dark:text-slate-200 shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 cursor-pointer focus:outline-none">
-    <i class="fa-solid fa-globe text-[#1877f2] text-sm"></i>
-    <span class="sm:flex hidden md:flex lg:inline-flex">{{ lang() === 'ar' ? 'العربية' : 'English' }}</span>
-    <i class="fa-solid fa-chevron-down  text-[10px] text-slate-400 "></i>
-    </button>
-
-@if (isLanguageOpen()) {
-  <div class="absolute right-0 z-30 lg:mt-10 sm:mt-10 w-36 mt-9 overflow-hidden rounded-xl border 20 top-0 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-xl shadow-slate-100 dark:shadow-none">
-    <button type="button" (click)="changeLanguage('en')"
-      [class]="lang() === 'en'
-        ? 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-bold text-[#1877f2] bg-blue-50/60 dark:bg-blue-950/60 transition cursor-pointer'
-        : 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition cursor-pointer'">
-      <span>English</span>
-      @if (lang() === 'en') { <i class="fa-solid fa-check text-xs"></i> }
-    </button>
-
-    <button type="button" (click)="changeLanguage('ar')"
-      [class]="lang() === 'ar'
-        ? 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-bold text-[#1877f2] bg-blue-50/60 dark:bg-blue-950/60 transition cursor-pointer'
-        : 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition cursor-pointer'">
-      <span>العربية</span>
-      @if (lang() === 'ar') { <i class="fa-solid fa-check text-xs"></i> }
-    </button>
-  </div>
-}
-</div>
-} @else if(lang() == 'ar'){
-  <div class="absolute languageZone top-3  md:left-15 lg:left-15 left-35   inline-block text-left">
-    <button type="button" (click)="toggleLanguage()" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-xs font-extrabold text-slate-700 dark:text-slate-200 shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 cursor-pointer focus:outline-none">
-    <i class="fa-solid fa-globe text-[#1877f2] text-sm"></i>
-    <span class="sm:flex hidden md:flex lg:inline-flex">{{ lang() === 'ar' ? 'العربية' : 'English' }}</span>
-    <i class="fa-solid fa-chevron-down  text-[10px] text-slate-400 "></i>
-    </button>
-
-@if (isLanguageOpen()) {
-  <div class="absolute right-0 z-30 lg:mt-10 sm:mt-10 w-36 mt-9 overflow-hidden rounded-xl border 20 top-0 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1 shadow-xl shadow-slate-100 dark:shadow-none">
-    <button type="button" (click)="changeLanguage('en')"
-      [class]="lang() === 'en'
-        ? 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-bold text-[#1877f2] bg-blue-50/60 dark:bg-blue-950/60 transition cursor-pointer'
-        : 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition cursor-pointer'">
-      <span>English</span>
-      @if (lang() === 'en') { <i class="fa-solid fa-check text-xs"></i> }
-    </button>
-
-    <button type="button" (click)="changeLanguage('ar')"
-      [class]="lang() === 'ar'
-        ? 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-bold text-[#1877f2] bg-blue-50/60 dark:bg-blue-950/60 transition cursor-pointer'
-        : 'flex w-full items-center justify-between px-3.5 py-2 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition cursor-pointer'">
-      <span>العربية</span>
-      @if (lang() === 'ar') { <i class="fa-solid fa-check text-xs"></i> }
-    </button>
-  </div>
-}
-</div>
-}
 </section>

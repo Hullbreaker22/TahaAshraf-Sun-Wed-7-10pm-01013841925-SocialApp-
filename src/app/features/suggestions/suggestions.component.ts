@@ -43,7 +43,6 @@ export class SuggestionsComponent implements OnInit {
   GetAllSuggestoins(){
     this.SuggestionsBase.getSuggestionsList(this.searchLimit()).subscribe({
       next:(res)=>{
-        console.log(res);  
         this.SuggestedList.set(res.data.suggestions)     
       },error:(err)=>{
         console.log(err);
@@ -72,7 +71,6 @@ export class SuggestionsComponent implements OnInit {
   }
 SearchFunction() {
   const query = this.SeatchBar().toLowerCase();
-  console.log(query);
 
   if (!query) {
     this.GetAllSuggestoins();

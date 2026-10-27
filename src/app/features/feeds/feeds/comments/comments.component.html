@@ -138,9 +138,8 @@
                                                 class="inline-flex items-center justify-center rounded-full p-1.5 cursor-pointer text-slate-500 dark:text-slate-400 transition hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-amber-500">
                                                 <i class="fa-regular fa-face-smile text-xs"></i>
                                             </button>
-
                                             @if (isEmojiPickerOpen()) {
-                                                <div class="absolute bottom-9 right-0 z-50 grid grid-cols-4 gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 shadow-xl w-44 animate-fadeIn">
+                                                <div class="absolute bottom-9 right-0 rtl:left-0 rtl:right-auto z-50 grid grid-cols-4 gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 shadow-xl w-44 animate-fadeIn">
                                                     @for (emoji of emojisList; track emoji) {
                                                         <button 
                                                             type="button" 
@@ -232,18 +231,18 @@
                                     <i class="fa-regular fa-face-smile text-sm"></i>
                                 </button>
 
-                                @if (isEmojiPickerOpen()) {
-                                    <div class="absolute bottom-10 right-0 z-90 grid grid-cols-4 gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-xl w-48 animate-fadeIn">
-                                        @for (emoji of emojisList; track emoji) {
-                                            <button 
-                                                type="button" 
-                                                (click)="addCommentEmoji(emoji)" 
-                                                class="flex h-9 w-9 items-center justify-center rounded-xl text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer text-slate-800 dark:text-slate-200">
-                                                {{ emoji }}
-                                            </button>
-                                        }
-                                    </div>
-                                }
+                            @if (isEmojiPickerOpen()) {
+                                <div class="absolute bottom-10 right-0 rtl:left-0 rtl:right-auto z-90 grid grid-cols-4 gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-xl w-48 animate-fadeIn">
+                                    @for (emoji of emojisList; track emoji) {
+                                        <button 
+                                            type="button" 
+                                            (click)="addCommentEmoji(emoji)" 
+                                            class="flex h-9 w-9 items-center justify-center rounded-xl text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer text-slate-800 dark:text-slate-200">
+                                            {{ emoji }}
+                                        </button>
+                                    }
+                                </div>
+                            }
                             </div>
                         </div>
                         <button [disabled]="isEmpty()" type="submit" class="inline-flex h-9 w-9 items-center cursor-pointer justify-center rounded-full bg-[#1877f2] text-white shadow-sm transition hover:bg-[#166fe5] disabled:cursor-not-allowed disabled:bg-[#9ec5ff] dark:disabled:bg-blue-950 disabled:opacity-100">
@@ -324,7 +323,7 @@
                             </button>
 
                             @if (isEmojiPickerOpen()) {
-                                <div class="absolute bottom-10 right-0 z-90 grid grid-cols-4 gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-xl w-48 animate-fadeIn">
+                                <div class="absolute bottom-10 right-0 rtl:left-0 rtl:right-auto z-90 grid grid-cols-4 gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-xl w-48 animate-fadeIn">
                                     @for (emoji of emojisList; track emoji) {
                                         <button 
                                             type="button" 

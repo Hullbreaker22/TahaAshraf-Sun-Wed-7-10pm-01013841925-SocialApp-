@@ -110,15 +110,18 @@ openEditModal(post: IPost) {
     this.EditImageFile.set(null);
     this.showEditModal.set(true);
     this.activeSavedPostId.set(null); 
-  }
+    document.body.style.overflow = 'hidden'; 
+}
 
-  closeEditModal() {
+
+closeEditModal() {
     this.showEditModal.set(false);
     this.editingPostId.set(null);
     this.EditPostBody.setValue('');
     this.EditImagePreview.set(null);
     this.EditImageFile.set(null);
-  }
+    document.body.style.overflow = 'auto'; 
+}
 
   ReadEditUploadedImg(e: Event) {
     const input = e.target as HTMLInputElement;
@@ -245,55 +248,58 @@ UploadedPhotoreader(): void {
 }
 
 
-CreatePost(e:SubmitEvent,formElement?:HTMLFormElement){
+CreatePost(e:SubmitEvent, formElement?:HTMLFormElement){
   e.preventDefault()
 
   const form = e.target as HTMLFormElement;
   let formData = new FormData
   let TheImage = this.ImageFile()
-  formData.append('body',this.Postbody.value)
+  formData.append('body', this.Postbody.value)
   if (TheImage !== null) {
     formData.append('image', TheImage)
   }
-  formData.append('privacy',this.PostPrivacy.value)
+  formData.append('privacy', this.PostPrivacy.value)
 
   this.PostBsae.CreatePost(formData).subscribe({
-    next:(res)=>{
+    next: (res) => {
       form.reset(); 
+      
+      this.Postbody.setValue('');
+      this.ImageFile.set(null);
       this.ImagePreview.set(null);
-      this.ImageFile.set(null); 
+      this.hasText.set(false); 
+
       this.Toastr.success('Post Created Successfully!')
-      if(this.specialfeed.isOn()== 'feed'){
+      
+      if(this.specialfeed.isOn() == 'feed'){
         this.specialfeed.getFeedPosts()
-      }else if(this.specialfeed.isOn()== 'MyPosts'){
+      }else if(this.specialfeed.isOn() == 'MyPosts'){
           this.specialfeed.getMyPosts()
-      }else if(this.specialfeed.isOn()== 'community'){
+      }else if(this.specialfeed.isOn() == 'community'){
          this.specialfeed.getAllposts()
       }
       this.Postslist.set(this.specialfeed.Postslist())
       
-    },error:(err)=>{
+    }, error: (err) => {
       console.log(err);
-      
     }
   })
 }
 
 openImageModal(imageUrl: string): void {
-  console.log(this.selectedImage());
   this.selectedImage.set(imageUrl);
+  document.body.style.overflow = 'hidden'; 
 }
 
 closeImageModal(): void {
   this.selectedImage.set(null);
+  document.body.style.overflow = 'auto'; 
 }
 
 BookMarkPost(Post: IPost) {
   this.PostBsae.BookMarkPost(Post._id).subscribe({
     next: (res) => {
-      console.log(res);
 
-      // تحديث الحالة محلياً
       const newBookmarkState = !Post.bookmarked;
       this.Postslist.update(posts => 
         posts.map(p => {
@@ -304,7 +310,6 @@ BookMarkPost(Post: IPost) {
         })
       );
 
-      // عرض التويستر بناءً على الحالة الجديدة
       if (newBookmarkState) {
         this.Toastr.success('Post saved successfully', 'Saved');
       } else {
@@ -426,12 +431,13 @@ SharredPost(posId: string) {
 openShareedModel(post:IPost){
   this.showShareModal.set(true)
   this.SharredPosted.set(post)
+  document.body.style.overflow = 'hidden'; 
 }
 
 CloseSharredModel(){
   this.showShareModal.set(false)
+  document.body.style.overflow = 'auto'; 
 }
-
 updateLocalPost(updatedPost: IPost) {
   this.Postslist.update(posts => 
     posts.map(p => p._id === updatedPost._id ? updatedPost : p)
